@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Quiz_test2</string>
+    <string name="dialog_msg">本当によろしいですか？</string>
+    <string name="dialog_btn_ok">OK</string>
+    <string name="dialog_btn_ng">NG</string>
+    <string name="dialog_ok_toast">回答を受け付けました</string>
+    <string name="dialog_ng_toast">キャンセルしました</string>
+</resources>
