@@ -5,4 +5,7 @@
     <string name="dialog_btn_ng">NG</string>
     <string name="dialog_ok_toast">回答を受け付けました</string>
     <string name="dialog_ng_toast">キャンセルしました</string>
+    <string name="menu_list_option_math">数学</string>
+    <string name="menu_list_option_english">英語</string>
+
 </resources>

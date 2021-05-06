@@ -1,9 +1,11 @@
 package com.websarva.wings.android.quiz_test2;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +26,11 @@ public class Question extends AppCompatActivity {
         //questionリストから渡された問題番号を取得
         int questionNum = intent.getIntExtra("questionNum", 0);
         displayQuestion(questionNum);
+
+        //アクションバー取得
+        ActionBar actionBar = getSupportActionBar();
+        //「戻る」を有効化
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     private void displayQuestion(int num) {
@@ -69,5 +76,20 @@ public class Question extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(Question.this, android.R.layout.simple_list_item_1, answerList);
         lvAnswer.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean returnVal = true;
+        int itemId = item.getItemId();
+
+        if (itemId == android.R.id.home) {
+            finish();
+        }
+        else {
+            returnVal = super.onOptionsItemSelected(item);
+        }
+
+        return returnVal;
     }
 }
