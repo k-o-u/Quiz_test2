@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,20 +22,34 @@ public class Question extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
+        ListView lvAnswer = findViewById(R.id.lvAnswer);
+
         //インテントオブジェクト取得
         Intent intent = getIntent();
 
-        //questionリストから渡された問題番号を取得
+        //questionリストから渡された問題番号,科目名を取得
         int questionNum = intent.getIntExtra("questionNum", 0);
-        displayQuestion(questionNum);
+        String subject = intent.getStringExtra("subject");
+
+        switch (subject) {
+            case "数学":
+                displayMathQuestion(questionNum);
+                break;
+            case "英語":
+                displayEnglishQuestion(questionNum);
+                break;
+        }
 
         //アクションバー取得
         ActionBar actionBar = getSupportActionBar();
         //「戻る」を有効化
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        //リストタップのリスナクラスの登録
+        lvAnswer.setOnItemClickListener(new Question.ListItemClickListener());
     }
 
-    private void displayQuestion(int num) {
+    private void displayMathQuestion(int num) {
         TextView tvQuestion = findViewById(R.id.tvQuestion);
         ListView lvAnswer = findViewById(R.id.lvAnswer);
         List<String> answerList = new ArrayList<>();
@@ -78,6 +94,51 @@ public class Question extends AppCompatActivity {
         lvAnswer.setAdapter(adapter);
     }
 
+    private void displayEnglishQuestion(int num) {
+        TextView tvQuestion = findViewById(R.id.tvQuestion);
+        ListView lvAnswer = findViewById(R.id.lvAnswer);
+        List<String> answerList = new ArrayList<>();
+
+        switch(num) {
+            case 0:
+                tvQuestion.setText("Q1:私の名前は太郎です。");
+                answerList.add("My name is Taro.");
+                answerList.add("Your name is Taro.");
+                answerList.add("This is Taro.");
+                answerList.add("My name are Taro.");
+                answerList.add("He is Taro.");
+                answerList.add("etc");
+                break;
+
+            case 1:
+                tvQuestion.setText("Q2：これはペンですか？");
+                answerList.add("Am I a pen?");
+                answerList.add("This is a pen.");
+                answerList.add("You are a pen.");
+                answerList.add("Is this a pen?");
+                answerList.add("Is he a pen?");
+                answerList.add("etc");
+                break;
+
+            case 2:
+                tvQuestion.setText("Q3：テーブルの上にりんごが２個あります。");
+                answerList.add("They are two apples.");
+                answerList.add("There is an apple on the table.");
+                answerList.add("There are two oranges on the table.");
+                answerList.add("There are two apples in the table.");
+                answerList.add("There are two apples on the table.");
+                answerList.add("etc");
+                break;
+
+            default:
+                tvQuestion.setText("Error");
+                break;
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(Question.this, android.R.layout.simple_list_item_1, answerList);
+        lvAnswer.setAdapter(adapter);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean returnVal = true;
@@ -91,5 +152,14 @@ public class Question extends AppCompatActivity {
         }
 
         return returnVal;
+    }
+
+    private class ListItemClickListener implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent = new Intent(Question.this, Answer.class);
+            intent.putExtra("answerNum", position);
+            startActivity(intent);
+        }
     }
 }

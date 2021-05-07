@@ -3,9 +3,10 @@
     <string name="dialog_msg">本当によろしいですか？</string>
     <string name="dialog_btn_ok">OK</string>
     <string name="dialog_btn_ng">NG</string>
-    <string name="dialog_ok_toast">回答を受け付けました</string>
-    <string name="dialog_ng_toast">キャンセルしました</string>
     <string name="menu_list_option_math">数学</string>
     <string name="menu_list_option_english">英語</string>
+    <string name="right">正解です！！！</string>
+    <string name="wrong">はずれです</string>
+    <string name="return_btn">問題リストに戻る</string>
 
 </resources>

@@ -23,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView text = findViewById(R.id.subject);
+        TextView subjectText = findViewById(R.id.subject);
         ListView lvQuestion = findViewById(R.id.lvQuestion);
         List<String> questionList = new ArrayList<>();
 
-        text.setText("数学");
+        subjectText.setText("数学");
         questionList.add("Q1");
         questionList.add("Q2");
         questionList.add("Q3");
@@ -42,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
     private class ListItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            TextView subjectText = findViewById(R.id.subject);
             Intent intent = new Intent(MainActivity.this, Question.class);
             intent.putExtra("questionNum", position);
+            intent.putExtra("subject", subjectText.getText());
             startActivity(intent);
         }
     }
@@ -61,14 +63,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean returnVal = true;
         int itemId = item.getItemId();
-        TextView text = findViewById(R.id.subject);
+        TextView subjectText = findViewById(R.id.subject);
 
         switch (itemId) {
             case R.id.menuListOptionMath:
-                text.setText("数学");
+                subjectText.setText("数学");
                 break;
             case R.id.menuListOptionEnglish:
-                text.setText("英語");
+                subjectText.setText("英語");
                 break;
             default:
                 returnVal = super.onOptionsItemSelected(item);
