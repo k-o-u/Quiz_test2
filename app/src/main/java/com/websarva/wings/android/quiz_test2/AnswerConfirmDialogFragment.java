@@ -26,10 +26,10 @@ public class AnswerConfirmDialogFragment extends DialogFragment {
 
             switch (which) {
                 case DialogInterface.BUTTON_POSITIVE:
-                    msg = getString(R.string.dialog_ok_toast);
+                    msg = getString(R.string.dialog_btn_ok);
                     break;
                 case DialogInterface.BUTTON_NEGATIVE:
-                    msg = getString(R.string.dialog_ng_toast);
+                    msg = getString(R.string.dialog_btn_ng);
                     break;
             }
 

@@ -17,6 +17,9 @@ import java.util.List;
 
 public class Question extends AppCompatActivity {
 
+    private int questionNum;
+    private String subject = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +31,8 @@ public class Question extends AppCompatActivity {
         Intent intent = getIntent();
 
         //questionリストから渡された問題番号,科目名を取得
-        int questionNum = intent.getIntExtra("questionNum", 0);
-        String subject = intent.getStringExtra("subject");
+        questionNum = intent.getIntExtra("questionNum", 0);
+        subject = intent.getStringExtra("subject");
 
         switch (subject) {
             case "数学":
@@ -158,8 +161,11 @@ public class Question extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(Question.this, Answer.class);
+            intent.putExtra("questionNum", questionNum);
             intent.putExtra("answerNum", position);
+            intent.putExtra("subject", subject);
             startActivity(intent);
+            finish();
         }
     }
 }
