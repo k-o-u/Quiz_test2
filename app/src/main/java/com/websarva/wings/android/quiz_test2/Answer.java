@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class Answer extends AppCompatActivity {
@@ -52,5 +53,9 @@ public class Answer extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    public void onBackButtonClick(View view) {
+        finish();
     }
 }
